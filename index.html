@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshMart Express - Online Grocery Delivery System</title>
+  <meta name="description" content="Order farm fresh groceries, dairy products, fruits, snacks, and household essentials online with 15-minute express delivery.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-primary-custom text-white text-center py-2 px-3 small font-weight-600">
+    <i class="bi bi-lightning-charge-fill text-warning me-1"></i> 
+    <strong>⚡ Express Delivery:</strong> Get your fresh groceries delivered in under 15 minutes! Free delivery on orders over ₹499.
+  </div>
+
+  <!-- Responsive Navigation Bar -->
+  <nav class="navbar navbar-expand-lg sticky-top navbar-custom" id="mainNavbar">
+    <div class="container">
+      <!-- Brand Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="#home">
+        <i class="bi bi-basket3-fill text-primary-custom me-2 fs-3"></i>
+        <span>FreshMart</span><small class="text-secondary ms-1 fw-bold fs-6">Express</small>
+      </a>
+
+      <!-- Mobile Controls (Cart + Hamburger Toggle) -->
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn btn-outline-primary-custom position-relative p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
+          <i class="bi bi-cart3 fs-5"></i>
+          <span id="cartBadgeCountMobile" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- Navbar Links & Search -->
+      <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home"><i class="bi bi-house-door me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#categories"><i class="bi bi-grid me-1"></i> Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#offers"><i class="bi bi-percent me-1"></i> Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#catalog"><i class="bi bi-bag-check me-1"></i> Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact"><i class="bi bi-telephone me-1"></i> Contact</a>
+          </li>
+        </ul>
+
+        <!-- Live Search Bar -->
+        <div class="d-flex align-items-center gap-3">
+          <div class="input-group search-input-group me-2" style="min-width: 260px;">
+            <input type="text" id="searchInput" class="form-control ps-3" placeholder="Search groceries..." aria-label="Search grocery items">
+            <button class="btn" type="button" aria-label="Search Button">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Cart Button -->
+          <button class="btn btn-primary-custom d-none d-lg-inline-flex align-items-center gap-2 position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span>Cart</span>
+            <span id="cartBadgeCount" class="badge bg-white text-dark rounded-pill ms-1 fw-bold">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Promotional Banner Slider -->
+  <section id="home" class="py-4">
+    <div class="container">
+      <div id="heroCarousel" class="carousel slide hero-slider" data-bs-ride="carousel" data-bs-interval="4500">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        
+        <div class="carousel-inner">
+          <!-- Slide 1: Farm Fresh Vegetables -->
+          <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80');">
+            <div class="carousel-overlay">
+              <div class="text-white col-lg-7">
+                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">100% Organic & Fresh</span>
+                <h1 class="display-5 fw-extrabold mb-3">Farm Fresh Fruits & Organic Vegetables</h1>
+                <p class="lead mb-4 text-light">Hand-picked premium produce delivered from local farms straight to your kitchen table in 15 minutes.</p>
+                <a href="#catalog" class="btn btn-primary-custom btn-lg"><i class="bi bi-bag-fill me-2"></i> Shop Fresh Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Dairy & Daily Essentials -->
+          <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1200&q=80');">
+            <div class="carousel-overlay">
+              <div class="text-white col-lg-7">
+                <span class="badge bg-success px-3 py-2 rounded-pill fw-bold mb-2">Daily Essentials</span>
+                <h1 class="display-5 fw-extrabold mb-3">Pure Dairy & Fresh Artisan Cheeses</h1>
+                <p class="lead mb-4 text-light">Start your mornings right with farm whole milk, Greek yogurts, and grass-fed butter.</p>
+                <a href="#catalog" class="btn btn-primary-custom btn-lg"><i class="bi bi-egg-fried me-2"></i> Explore Dairy</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Snacks & Beverages -->
+          <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80');">
+            <div class="carousel-overlay">
+              <div class="text-white col-lg-7">
+                <span class="badge bg-danger px-3 py-2 rounded-pill fw-bold mb-2">Mega Savings</span>
+                <h1 class="display-5 fw-extrabold mb-3">Snack Time Favorites & Cold Juices</h1>
+                <p class="lead mb-4 text-light">Up to 30% OFF on gourmet snacks, roasted nuts, whole-grain biscuits, and cold-pressed juices.</p>
+                <a href="#offers" class="btn btn-primary-custom btn-lg"><i class="bi bi-tag-fill me-2"></i> View All Offers</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Highlight Grid -->
+  <section class="py-3">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="bi bi-stopwatch-fill"></i></div>
+            <h6 class="fw-bold mb-1">15-Min Delivery</h6>
+            <p class="text-muted small mb-0">Lightning fast local drop-off</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="bi bi-flower1"></i></div>
+            <h6 class="fw-bold mb-1">100% Organic</h6>
+            <p class="text-muted small mb-0">Direct from verified farms</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+            <h6 class="fw-bold mb-1">Secure Checkout</h6>
+            <p class="text-muted small mb-0">Encrypted instant payment</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="bi bi-arrow-counterclockwise"></i></div>
+            <h6 class="fw-bold mb-1">Easy Returns</h6>
+            <p class="text-muted small mb-0">No questions asked refund</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offers & Banners Carousel Section -->
+  <section id="offers" class="py-5 bg-white">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <span class="text-primary-custom fw-bold text-uppercase small tracking-wide">Hot Deals & Promotions</span>
+          <h2 class="fw-bold mb-0">Special Promotional Offers</h2>
+        </div>
+        <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill fw-bold">
+          <i class="bi bi-clock-history me-1"></i> Limited Time
+        </span>
+      </div>
+
+      <!-- Offers Carousel -->
+      <div id="offersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-inner">
+          <!-- Offers Slide 1 -->
+          <div class="carousel-item active">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card offer-card bg-gradient p-4 text-white" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge bg-white text-dark fw-bold rounded-pill">Discount Banner</span>
+                    <i class="bi bi-percent fs-2"></i>
+                  </div>
+                  <h4 class="fw-bold mb-2">Flat 20% OFF Everything</h4>
+                  <p class="small text-white-50 mb-3">Use promo code <code class="bg-white text-success px-2 py-1 rounded fw-bold">SAVE20</code> at checkout.</p>
+                  <button class="btn btn-light btn-sm text-success fw-bold rounded-pill align-self-start" onclick="applyPromoDirect('SAVE20')">
+                    Apply Offer <i class="bi bi-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="col-md-4">
+                <div class="card offer-card p-4 text-white" style="background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge bg-white text-dark fw-bold rounded-pill">Festival Offer</span>
+                    <i class="bi bi-gift-fill fs-2"></i>
+                  </div>
+                  <h4 class="fw-bold mb-2">Festival Mega Hamper</h4>
+                  <p class="small text-white-50 mb-3">Get Flat ₹50 discount on fresh fruits & sweets hamper! Code: <code class="bg-white text-warning px-2 py-1 rounded fw-bold">FESTIVAL50</code></p>
+                  <button class="btn btn-light btn-sm text-warning fw-bold rounded-pill align-self-start" onclick="applyPromoDirect('FESTIVAL50')">
+                    Claim Deal <i class="bi bi-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card offer-card p-4 text-white" style="background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge bg-white text-dark fw-bold rounded-pill">Combo Deal</span>
+                    <i class="bi bi-layers-fill fs-2"></i>
+                  </div>
+                  <h4 class="fw-bold mb-2">Breakfast Combo Pack</h4>
+                  <p class="small text-white-50 mb-3">Whole Milk (1L) + Oats Biscuits + Bananas starting at just ₹199!</p>
+                  <a href="#catalog" class="btn btn-light btn-sm text-indigo fw-bold rounded-pill align-self-start">
+                    Shop Combo <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offers Slide 2 -->
+          <div class="carousel-item">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card offer-card p-4 text-white" style="background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge bg-white text-dark fw-bold rounded-pill">Weekend BOGO</span>
+                    <i class="bi bi-basket-fill fs-2"></i>
+                  </div>
+                  <h4 class="fw-bold mb-2">Buy 1 Get 1 Free Juice</h4>
+                  <p class="small text-white-50 mb-3">Buy 1L Cold-Pressed Orange Juice and get 330ml Sparkling Lemonade free!</p>
+                  <a href="#catalog" class="btn btn-light btn-sm text-pink fw-bold rounded-pill align-self-start">
+                    Claim BOGO <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card offer-card p-4 text-white" style="background: linear-gradient(135deg, #06b6d4 0%, #0e7490 100%);">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge bg-white text-dark fw-bold rounded-pill">Free Shipping</span>
+                    <i class="bi bi-truck fs-2"></i>
+                  </div>
+                  <h4 class="fw-bold mb-2">Zero Delivery Charges</h4>
+                  <p class="small text-white-50 mb-3">Automatic Free Express Delivery on all grocery baskets over ₹499.</p>
+                  <a href="#catalog" class="btn btn-light btn-sm text-cyan fw-bold rounded-pill align-self-start">
+                    Start Order <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card offer-card p-4 text-white" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge bg-white text-dark fw-bold rounded-pill">Organic Special</span>
+                    <i class="bi bi-flower2 fs-2"></i>
+                  </div>
+                  <h4 class="fw-bold mb-2">Organic Produce Box</h4>
+                  <p class="small text-white-50 mb-3">Save 25% on weekly organic fruits & greens subscription bundles.</p>
+                  <a href="#catalog" class="btn btn-light btn-sm text-purple fw-bold rounded-pill align-self-start">
+                    Subscribe Now <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4 gap-2">
+          <button class="btn btn-sm btn-outline-secondary rounded-circle" type="button" data-bs-target="#offersCarousel" data-bs-slide="prev">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-secondary rounded-circle" type="button" data-bs-target="#offersCarousel" data-bs-slide="next">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Bar & Interactive Pill Filter -->
+  <section id="categories" class="py-4 bg-light">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="text-primary-custom fw-bold text-uppercase small">Curated Assortment</span>
+        <h2 class="fw-bold">Browse Grocery Categories</h2>
+      </div>
+
+      <!-- Category Filter Pills Bar -->
+      <div class="d-flex justify-content-start justify-content-md-center align-items-center gap-2 overflow-x-auto pb-3">
+        <button class="category-pill active" data-category="all">
+          <i class="bi bi-grid-fill"></i> All Items
+        </button>
+        <button class="category-pill" data-category="fruits-veg">
+          <i class="bi bi-apple"></i> Fruits & Vegetables
+        </button>
+        <button class="category-pill" data-category="dairy">
+          <i class="bi bi-cup-hot-fill"></i> Dairy Products
+        </button>
+        <button class="category-pill" data-category="snacks">
+          <i class="bi bi-cookie"></i> Snacks
+        </button>
+        <button class="category-pill" data-category="beverages">
+          <i class="bi bi-cup-straw"></i> Beverages
+        </button>
+        <button class="category-pill" data-category="household">
+          <i class="bi bi-house-door-fill"></i> Household Items
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Catalog Section (Sidebar Filters + Cards Grid) -->
+  <section id="catalog" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Left Filter Sidebar -->
+        <div class="col-lg-3">
+          <div class="filter-card">
+            <div class="filter-title">
+              <span><i class="bi bi-sliders me-2"></i> Filter Products</span>
+              <button class="btn btn-link btn-sm p-0 text-decoration-none text-primary-custom" id="clearFiltersBtn">Reset All</button>
+            </div>
+
+            <!-- Dietary Filter -->
+            <div class="mb-4">
+              <label class="form-label fw-bold text-dark mb-2">Dietary Preference</label>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="dietFilter" id="dietAll" value="all" checked>
+                <label class="form-check-label text-secondary small font-weight-600" for="dietAll">
+                  All Items
+                </label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="dietFilter" id="dietVeg" value="veg">
+                <label class="form-check-label text-secondary small font-weight-600 d-flex align-items-center gap-2" for="dietVeg">
+                  <span class="badge-diet veg"></span> Vegetarian Only
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="dietFilter" id="dietNonVeg" value="non-veg">
+                <label class="form-check-label text-secondary small font-weight-600 d-flex align-items-center gap-2" for="dietNonVeg">
+                  <span class="badge-diet non-veg"></span> Non-Vegetarian
+                </label>
+              </div>
+            </div>
+
+            <!-- Price Range Slider -->
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <label for="priceRange" class="form-label fw-bold text-dark mb-0">Max Price</label>
+                <span class="badge bg-primary-light fw-bold" id="priceValueDisplay">₹500</span>
+              </div>
+              <input type="range" class="form-range" id="priceRange" min="30" max="600" step="10" value="500">
+              <div class="d-flex justify-content-between text-muted extra-small">
+                <span>₹30</span>
+                <span>₹600</span>
+              </div>
+            </div>
+
+            <!-- Brand Multi-Selection Filter -->
+            <div class="mb-3">
+              <label class="form-label fw-bold text-dark mb-2">Brand</label>
+              <div id="brandFilterContainer" class="pe-1" style="max-height: 200px; overflow-y: auto;">
+                <!-- Dynamically populated via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Product Cards Grid -->
+        <div class="col-lg-9">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <p class="text-muted fw-semibold mb-0" id="resultCount">Showing 0 products</p>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small text-muted d-none d-sm-inline">Sort by:</span>
+              <select class="form-select form-select-sm border-0 shadow-sm rounded-pill font-weight-600" style="width: auto;" aria-label="Sort products">
+                <option value="featured">Featured</option>
+                <option value="low-high">Price: Low to High</option>
+                <option value="high-low">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Grid Container -->
+          <div class="row" id="productGridContainer">
+            <!-- Dynamic JavaScript Rendering -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Service Info Section -->
+  <section id="contact" class="py-5 bg-white border-top">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="text-primary-custom fw-bold text-uppercase small">Need Assistance?</span>
+          <h2 class="fw-bold mb-3">Get in Touch with FreshMart Support</h2>
+          <p class="text-muted mb-4">Have a question regarding your order delivery, product availability, or refund? Our customer care team is online 24/7 to assist you.</p>
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="feature-icon m-0" style="width: 48px; height: 48px; font-size: 1.2rem;">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <div>
+              <h6 class="fw-bold mb-0">Headquarters</h6>
+              <p class="text-muted small mb-0">FreshMart Tower, Tech Park Road, Bengaluru 560100</p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="feature-icon m-0" style="width: 48px; height: 48px; font-size: 1.2rem;">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <div>
+              <h6 class="fw-bold mb-0">Customer Care Hotline</h6>
+              <p class="text-muted small mb-0">+91 1800-456-FRESH (Toll Free)</p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center gap-3">
+            <div class="feature-icon m-0" style="width: 48px; height: 48px; font-size: 1.2rem;">
+              <i class="bi bi-envelope-fill"></i>
+            </div>
+            <div>
+              <h6 class="fw-bold mb-0">Email Support</h6>
+              <p class="text-muted small mb-0">support@freshmartexpress.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-lg p-4 rounded-4">
+            <h5 class="fw-bold mb-3">Send Us a Quick Message</h5>
+            <form onsubmit="event.preventDefault(); showToast('Thank you! Your message has been sent successfully.', 'success'); this.reset();">
+              <div class="mb-3">
+                <label for="contactName" class="form-label small fw-bold">Your Name</label>
+                <input type="text" class="form-control rounded-3" id="contactName" placeholder="Enter your full name" required>
+              </div>
+              <div class="mb-3">
+                <label for="contactEmail" class="form-label small fw-bold">Email Address</label>
+                <input type="email" class="form-control rounded-3" id="contactEmail" placeholder="name@example.com" required>
+              </div>
+              <div class="mb-3">
+                <label for="contactMessage" class="form-label small fw-bold">Message</label>
+                <textarea class="form-control rounded-3" id="contactMessage" rows="3" placeholder="How can we help you?" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary-custom w-100 py-2">Submit Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pt-5 pb-4">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <a class="navbar-brand d-flex align-items-center text-white mb-3" href="#">
+            <i class="bi bi-basket3-fill text-primary-custom me-2 fs-3"></i>
+            <span class="fs-4">FreshMart</span><small class="text-success ms-1 fw-bold fs-6">Express</small>
+          </a>
+          <p class="small text-muted">FreshMart Express is India's fastest online grocery delivery platform bringing organic produce, daily dairy, gourmet snacks, and household essentials directly to your doorstep.</p>
+          <div class="d-flex gap-3 fs-5">
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="footer-title">Categories</h6>
+          <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+            <li><a href="#categories">Fruits & Vegetables</a></li>
+            <li><a href="#categories">Dairy Products</a></li>
+            <li><a href="#categories">Snacks & Munchies</a></li>
+            <li><a href="#categories">Beverages</a></li>
+            <li><a href="#categories">Household Essentials</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="footer-title">Quick Links</h6>
+          <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#offers">Special Offers</a></li>
+            <li><a href="#catalog">Product Catalog</a></li>
+            <li><a href="#contact">Contact Support</a></li>
+            <li><a href="#" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">My Shopping Cart</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4">
+          <h6 class="footer-title">Subscribe to Weekly Deals</h6>
+          <p class="small text-muted mb-3">Get exclusive discount coupons and fresh inventory updates delivered to your inbox.</p>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed to newsletter!', 'success'); this.reset();" class="d-flex gap-2">
+            <input type="email" class="form-control form-control-sm rounded-pill" placeholder="Enter your email" required>
+            <button type="submit" class="btn btn-primary-custom btn-sm px-3 rounded-pill">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <hr class="border-secondary my-4">
+
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-muted gap-2">
+        <p class="mb-0">&copy; 2026 FreshMart Express Inc. All rights reserved.</p>
+        <div class="d-flex gap-3">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Details Modal (Bootstrap Modal Task 5) -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 rounded-4 overflow-hidden shadow-lg">
+        <div class="modal-header border-0 bg-light">
+          <h5 class="modal-title fw-bold" id="productModalLabel">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row align-items-center g-4">
+            <div class="col-md-6">
+              <div class="bg-light rounded-4 overflow-hidden p-3 text-center">
+                <img id="modalProductImg" src="" alt="Product Detail Visual" class="img-fluid rounded-3" style="max-height: 280px; object-fit: contain;">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-2">
+                <span id="modalProductDiet" class="badge bg-success rounded-pill me-2"></span>
+                <span id="modalProductCategory" class="badge bg-light text-secondary rounded-pill fw-bold text-uppercase"></span>
+              </div>
+              <h3 id="modalProductTitle" class="fw-bold mb-1"></h3>
+              <p class="text-muted small mb-2">Brand: <strong id="modalProductBrand" class="text-dark"></strong></p>
+              
+              <div id="modalProductRating" class="small mb-3"></div>
+
+              <div class="d-flex align-items-baseline gap-2 mb-3">
+                <span id="modalProductPrice" class="fs-2 fw-extrabold text-dark"></span>
+                <span id="modalProductOriginalPrice" class="text-muted text-decoration-line-through fs-6"></span>
+                <span class="badge bg-danger-subtle text-danger font-weight-700 ms-2">Best Price</span>
+              </div>
+
+              <p id="modalProductDescription" class="text-secondary small mb-4"></p>
+
+              <!-- Quantity Selector & Add to Cart -->
+              <div class="d-flex align-items-center gap-3">
+                <div class="input-group" style="width: 130px;">
+                  <button class="btn btn-outline-secondary" type="button" onclick="updateModalQty(-1)">-</button>
+                  <input type="number" id="modalQtyInput" class="form-control text-center fw-bold" value="1" min="1">
+                  <button class="btn btn-outline-secondary" type="button" onclick="updateModalQty(1)">+</button>
+                </div>
+                <button class="btn btn-primary-custom flex-grow-1 py-2" onclick="addFromModal()">
+                  <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Drawer (Bootstrap Offcanvas Task 7) -->
+  <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold d-flex align-items-center" id="cartOffcanvasLabel">
+        <i class="bi bi-bag-check-fill text-primary-custom me-2"></i> Shopping Cart
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body d-flex flex-direction-column">
+      <!-- Cart Items List Container -->
+      <div id="cartItemsContainer" class="flex-grow-1 overflow-y-auto pe-1">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Cart Summary & Coupon Section -->
+      <div class="border-top pt-3 mt-auto">
+        <!-- Coupon Input -->
+        <div class="input-group mb-3">
+          <input type="text" id="couponInput" class="form-control text-uppercase font-weight-600" placeholder="Promo code (SAVE20)">
+          <button class="btn btn-outline-primary-custom" type="button" id="applyCouponBtn">Apply</button>
+        </div>
+
+        <div class="d-flex justify-content-between small text-muted mb-1">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0.00</span>
+        </div>
+        <div class="d-flex justify-content-between small text-muted mb-1">
+          <span>GST (5%)</span>
+          <span id="cartTax">₹0.00</span>
+        </div>
+        <div class="d-flex justify-content-between small text-muted mb-1">
+          <span>Delivery Fee</span>
+          <span id="cartDeliveryFee" class="fw-semibold">₹0.00</span>
+        </div>
+        <div class="d-flex justify-content-between small text-success mb-2">
+          <span>Discount</span>
+          <span id="cartDiscount">-₹0.00</span>
+        </div>
+
+        <hr class="my-2">
+
+        <div class="d-flex justify-content-between fs-5 fw-bold mb-3 text-dark">
+          <span>Total Amount</span>
+          <span id="cartGrandTotal" class="text-primary-custom">₹0.00</span>
+        </div>
+
+        <button class="btn btn-primary-custom w-100 py-3 rounded-3 font-weight-700 fs-6" id="checkoutBtn" onclick="checkoutOrder()" disabled>
+          Proceed to Checkout <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Application Logic JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>
