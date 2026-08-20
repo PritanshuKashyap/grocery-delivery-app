@@ -6,7 +6,7 @@
 let products = [];  
 let cart = [];
 let appliedCoupon = null;  
-let currentModalProductId = null;
+let currentModalProductId = null; 
 
 // Filter State
 const filterState = {
