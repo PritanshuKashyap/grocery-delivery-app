@@ -5,7 +5,7 @@
 // Global State
 let products = [];
 let cart = [];
-let appliedCoupon = null;
+let appliedCoupon = null;  
 let currentModalProductId = null;
 
 // Filter State
