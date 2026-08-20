@@ -3,7 +3,7 @@
  */
 
 // Global State
-let products = [];
+let products = [];  
 let cart = [];
 let appliedCoupon = null;  
 let currentModalProductId = null;
